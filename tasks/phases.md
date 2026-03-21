@@ -1,7 +1,7 @@
 # Liquid Salt Divers — Phases
 
 ## Phase 1: Foundation
-**Status**: TODO
+**Status**: DONE ✅
 **Goal**: Project scaffolding, design token system, Sanity CMS schemas, deployable skeleton
 **Tasks**:
 - [ ] Initialize Next.js 14 project with TypeScript + App Router
