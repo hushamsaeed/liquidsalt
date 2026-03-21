@@ -107,7 +107,7 @@
 - [ ] `npx playwright test tests/courses.spec.ts` passes
 
 ## Phase 5: Content Pages
-**Status**: TODO
+**Status**: DONE ✅
 **Goal**: All remaining content pages built and linked
 **Tasks**:
 - [ ] Excursion pages (4): Snorkelling, Sandbank, Night Snorkel, Big Game Fishing — dynamic from Sanity
