@@ -1,2 +1,11 @@
 export { Hero } from "./Hero";
 export { CredentialStrip } from "./CredentialStrip";
+export { Orientation } from "./Orientation";
+export { MantaMadness } from "./MantaMadness";
+export { PackagesSection } from "./PackagesSection";
+export { ExperiencesSection } from "./ExperiencesSection";
+export { HanifaruBayEditorial } from "./HanifaruBayEditorial";
+export { TeamSection } from "./TeamSection";
+export { AccommodationSection } from "./AccommodationSection";
+export { SocialProof } from "./SocialProof";
+export { PreSeasonCTA } from "./PreSeasonCTA";

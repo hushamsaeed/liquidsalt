@@ -53,7 +53,7 @@
 - [ ] Map renders with custom styling and pins
 
 ## Phase 3: Homepage
-**Status**: TODO
+**Status**: DONE ✅
 **Goal**: Complete homepage with all 12 sections per FSD spec, fully responsive
 **Tasks**:
 - [ ] Section 01: Hero — video/image bg, "Deeply Addictive." tagline, pre-season banner, dual CTAs, scroll indicator
