@@ -1,0 +1,63 @@
+/** Static package data — used as fallback when Sanity has no content yet */
+export const STATIC_PACKAGES = [
+  {
+    _id: "pkg-manta-madness",
+    title: "Manta Madness",
+    slug: { current: "manta-madness" },
+    tagline: "The ultimate Hanifaru Bay snorkel experience",
+    priceFrom: 450,
+    pricePer: "person",
+    badge: "Most Popular",
+    featured: true,
+    duration: "3 days",
+    inclusions: [
+      "3 Hanifaru Bay snorkel trips",
+      "2 guided reef dives",
+      "Full equipment hire",
+      "Boat transfers included",
+      "Marine biologist briefing",
+      "Underwater photography tips",
+    ],
+    descriptionText:
+      "Manta Madness is our flagship package — designed for those who have travelled to Baa Atoll for one reason: manta rays. Over three days, you will make three trips to Hanifaru Bay during peak aggregation conditions, guided by our most experienced instructors who know the bay's currents intimately. Between snorkel sessions, you will dive two of the best reef sites in the atoll, encountering reef sharks, eagle rays, and the technicolour coral gardens that make this UNESCO biosphere unique. All equipment, boat transfers, and a detailed marine biology briefing are included.",
+  },
+  {
+    _id: "pkg-dive-dive-dive",
+    title: "Dive Dive Dive",
+    slug: { current: "dive-dive-dive" },
+    tagline: "Six dives across the best reefs in Baa Atoll",
+    priceFrom: 380,
+    pricePer: "person",
+    featured: false,
+    duration: "4 days",
+    inclusions: [
+      "6 guided reef dives",
+      "Full equipment hire",
+      "Boat transfers included",
+      "Dive log signed by instructor",
+      "Channel and reef site mix",
+    ],
+    descriptionText:
+      "For certified divers who want to maximise bottom time. Six dives over four days, carefully selected to showcase the full range of Baa Atoll's underwater landscapes: channel drifts where grey reef sharks patrol, thilas (submerged pinnacles) carpeted in soft coral, and cleaning stations where manta rays hover motionless while cleaner wrasse do their work. Every dive is guided by a PADI-certified instructor who dives these sites daily.",
+  },
+  {
+    _id: "pkg-dive-hanifaru",
+    title: "Dive Hanifaru",
+    slug: { current: "dive-hanifaru" },
+    tagline: "Scuba dive Hanifaru Bay with the experts",
+    priceFrom: 520,
+    pricePer: "person",
+    featured: false,
+    duration: "3 days",
+    inclusions: [
+      "2 Hanifaru Bay dives",
+      "2 premium reef dives",
+      "1 night dive experience",
+      "Full equipment hire",
+      "Underwater photography tips",
+      "Boat transfers included",
+    ],
+    descriptionText:
+      "The definitive Hanifaru experience for scuba divers. Two dives inside Hanifaru Bay itself — where conditions permit — combined with two premium reef dives and a spectacular night dive. This package is for divers who want to witness the manta aggregation from below the surface, surrounded by the full spectacle of cyclone feeding behaviour. Requires Advanced Open Water certification or equivalent.",
+  },
+];

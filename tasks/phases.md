@@ -80,7 +80,7 @@
 - [ ] Mapbox map renders with pins
 
 ## Phase 4: Package & Course Pages
-**Status**: TODO
+**Status**: DONE ✅
 **Goal**: All 3 package pages + 9 PADI course pages live with CMS content and working forms
 **Tasks**:
 - [ ] Dynamic route: /packages/[slug] with Sanity data fetching (SSG with revalidation)
