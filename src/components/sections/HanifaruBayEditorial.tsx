@@ -39,6 +39,14 @@ export function HanifaruBayEditorial() {
   return (
     <SectionWrapper className="py-space-12 lg:py-space-16 bg-salt-white" id="hanifaru-bay">
       <div className="mx-auto max-w-7xl px-6">
+        {/* Editorial pull quote — Vignelli treatment */}
+        <blockquote className="mb-12">
+          <p className="font-display text-3xl md:text-4xl lg:text-5xl italic text-gradient-ocean leading-tight">
+            &ldquo;There are only a handful of places in the world where visitors
+            can get so close to so many manta rays.&rdquo;
+          </p>
+        </blockquote>
+
         <h2 className="font-display text-4xl md:text-5xl text-ocean-navy">
           The Reef at Hanifaru
         </h2>

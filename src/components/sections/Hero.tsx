@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Button } from "../ui/Button";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 
 interface HeroProps {
@@ -27,31 +27,39 @@ export function Hero({
   posterSrc,
   imageSrc,
 }: HeroProps) {
+  const { scrollY } = useScroll();
+  const bgY = useTransform(scrollY, [0, 500], [0, 150]);
+
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
-      {/* Background */}
-      {videoSrc ? (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster={posterSrc}
-          className="absolute inset-0 h-full w-full object-cover"
-        >
-          <source src={videoSrc} type="video/mp4" />
-        </video>
-      ) : imageSrc ? (
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${imageSrc})` }}
-        />
-      ) : (
-        <div className="absolute inset-0 bg-gradient-to-b from-ocean-navy via-reef-teal to-night-dive" />
-      )}
+      {/* Background with parallax */}
+      <motion.div className="absolute inset-0" style={{ y: bgY }}>
+        {videoSrc ? (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={posterSrc}
+            className="absolute inset-0 h-full w-full object-cover"
+          >
+            <source src={videoSrc} type="video/mp4" />
+          </video>
+        ) : imageSrc ? (
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${imageSrc})` }}
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-b from-ocean-navy via-reef-teal to-night-dive" />
+        )}
+      </motion.div>
 
       {/* Overlay gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-manta-black/55" />
+
+      {/* Caustics overlay */}
+      <div className="caustics-overlay absolute inset-0 pointer-events-none" />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center px-6 text-center">
@@ -115,7 +123,7 @@ export function Hero({
         transition={{ delay: 1.2 }}
       >
         <svg
-          className="w-6 h-6 text-salt-white/60 animate-scroll-bounce"
+          className="w-6 h-6 text-salt-white/60 animate-[float_3s_ease-in-out_infinite]"
           fill="none"
           viewBox="0 0 24 24"
           aria-hidden="true"

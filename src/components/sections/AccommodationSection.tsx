@@ -32,7 +32,7 @@ const PROPERTIES = [
 
 export function AccommodationSection() {
   return (
-    <SectionWrapper className="py-space-12 lg:py-space-16 bg-sand" id="accommodation">
+    <SectionWrapper className="py-space-12 lg:py-space-16 bg-sand wave-divider" id="accommodation">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="font-display text-4xl md:text-5xl text-ocean-navy">
           Where to Stay on Dharavandhoo

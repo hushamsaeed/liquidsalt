@@ -1,7 +1,7 @@
 "use client";
 
-import { SectionWrapper } from "../ui/SectionWrapper";
-import { PackageCard } from "../ui/PackageCard";
+import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { PackageCard } from "@/components/ui/PackageCard";
 
 // Static data — will be replaced with Sanity CMS data in Phase 4
 const PACKAGES = [
@@ -19,6 +19,7 @@ const PACKAGES = [
       "Boat transfers included",
       "Marine biologist briefing",
     ],
+    description: "Our flagship package — designed for those who have travelled to Baa Atoll for one reason: manta rays. Three trips to Hanifaru Bay during peak aggregation conditions, guided by our most experienced instructors.",
   },
   {
     title: "Dive Dive Dive",
@@ -30,7 +31,9 @@ const PACKAGES = [
       "Full equipment hire",
       "Boat transfers included",
       "Dive log signed by instructor",
+      "Channel and reef site mix",
     ],
+    description: "For certified divers who want to maximise bottom time. Six dives over four days, carefully selected to showcase the full range of Baa Atoll's underwater landscapes.",
   },
   {
     title: "Dive Hanifaru",
@@ -43,7 +46,9 @@ const PACKAGES = [
       "1 night dive experience",
       "Full equipment hire",
       "Underwater photography tips",
+      "Boat transfers included",
     ],
+    description: "The definitive Hanifaru experience for scuba divers. Two dives inside Hanifaru Bay itself, combined with premium reef dives and a spectacular night dive. Requires Advanced Open Water certification.",
   },
 ];
 

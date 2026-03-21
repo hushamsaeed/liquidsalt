@@ -31,6 +31,7 @@ export function WhatsAppCTA({
           bg-[#25D366] text-white
           shadow-lg hover:shadow-xl hover:scale-110
           transition-all duration-200
+          animate-[gentle-pulse_3s_ease-in-out_infinite]
           ${className}
         `}
       >

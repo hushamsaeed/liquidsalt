@@ -1,10 +1,10 @@
 "use client";
 
-import { WhatsAppCTA } from "../ui/WhatsAppCTA";
+import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
 
 export function PreSeasonCTA() {
   return (
-    <section className="bg-coral-gold py-space-8 lg:py-space-12" id="pre-season-offer">
+    <section className="wave-divider bg-coral-gold pt-16 pb-space-8 lg:pt-16 lg:pb-space-12" id="pre-season-offer">
       <div className="mx-auto max-w-4xl px-6 text-center">
         <h2 className="font-display text-3xl md:text-4xl text-white">
           Pre-Season Discounts Are Back
@@ -18,7 +18,7 @@ export function PreSeasonCTA() {
             variant="inline"
             label="Book Now via WhatsApp"
             message="Hi! I'd like to book a package with the 15% pre-season discount."
-            className="bg-white text-coral-gold hover:bg-salt-white"
+            className="bg-white text-coral-gold hover:bg-salt-white animate-[gentle-pulse_3s_ease-in-out_infinite]"
           />
         </div>
       </div>
