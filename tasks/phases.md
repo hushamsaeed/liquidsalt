@@ -24,7 +24,7 @@
 - [ ] `public/logos/` contains logo files
 
 ## Phase 2: Design System & Components
-**Status**: TODO
+**Status**: DONE ✅
 **Goal**: All shared UI components built and visually verified
 **Tasks**:
 - [ ] Navigation component (transparent → solid scroll, mobile hamburger, dropdown menus)
