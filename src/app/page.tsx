@@ -18,7 +18,7 @@ export default function HomePage() {
     <>
       <Nav />
 
-      <main>
+      <main id="main-content">
         {/* 01 — Hero: The Surface */}
         <Hero />
 
