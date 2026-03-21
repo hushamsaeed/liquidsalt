@@ -78,6 +78,7 @@ export function Nav() {
     <header
       className={`
         fixed top-0 left-0 right-0 z-40
+        ${mobileOpen ? "bg-ocean-navy" : ""}
         transition-all duration-300 ease-out
         ${scrolled
           ? "bg-ocean-navy/95 backdrop-blur-md shadow-lg"
@@ -149,7 +150,7 @@ export function Nav() {
 
         {/* Mobile Hamburger */}
         <button
-          className="relative z-50 flex lg:hidden flex-col gap-1.5 p-2"
+          className="relative z-[70] flex lg:hidden flex-col gap-1.5 p-2"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
@@ -161,7 +162,7 @@ export function Nav() {
 
         {/* Mobile Overlay */}
         {mobileOpen && (
-          <div className="fixed inset-0 z-40 bg-ocean-navy flex flex-col items-center justify-center gap-6 lg:hidden">
+          <div className="fixed inset-0 z-[60] bg-ocean-navy flex flex-col items-center justify-center gap-6 lg:hidden overflow-y-auto py-24">
             {NAV_ITEMS.map((item) => (
               <div key={item.label} className="text-center">
                 <Link

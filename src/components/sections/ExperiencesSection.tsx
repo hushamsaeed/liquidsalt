@@ -4,12 +4,12 @@ import { SectionWrapper } from "../ui/SectionWrapper";
 import { ExperienceTile } from "../ui/ExperienceTile";
 
 const EXPERIENCES = [
-  { title: "Scuba Diving", description: "Explore 30+ reef and channel dive sites across Baa Atoll", href: "/diving" },
-  { title: "PADI Courses", description: "From Bubble Maker to Divemaster — complete training pathway", href: "/courses" },
-  { title: "Snorkelling", description: "Swim alongside manta rays at Hanifaru Bay", href: "/excursions/snorkelling" },
-  { title: "Sandbank Trip", description: "Pristine white sand surrounded by turquoise lagoon", href: "/excursions/sandbank" },
-  { title: "Night Snorkel", description: "Bioluminescent plankton and nocturnal reef creatures", href: "/excursions/night-snorkel" },
-  { title: "Big Game Fishing", description: "Yellowfin tuna, wahoo, and sailfish in deep blue water", href: "/excursions/big-game-fishing" },
+  { title: "Scuba Diving", description: "Explore 30+ reef and channel dive sites across Baa Atoll", href: "/diving", image: "/images/experiences/scuba-diving.webp" },
+  { title: "PADI Courses", description: "From Bubble Maker to Divemaster — complete training pathway", href: "/courses", image: "/images/experiences/padi-courses.webp" },
+  { title: "Snorkelling", description: "Swim alongside manta rays at Hanifaru Bay", href: "/excursions/snorkelling", image: "/images/experiences/snorkelling.webp" },
+  { title: "Sandbank Trip", description: "Pristine white sand surrounded by turquoise lagoon", href: "/excursions/sandbank", image: "/images/experiences/sandbank.webp" },
+  { title: "Night Snorkel", description: "Bioluminescent plankton and nocturnal reef creatures", href: "/excursions/night-snorkel", image: "/images/experiences/night-snorkel.webp" },
+  { title: "Big Game Fishing", description: "Yellowfin tuna, wahoo, and sailfish in deep blue water", href: "/excursions/big-game-fishing", image: "/images/experiences/big-game-fishing.webp" },
 ];
 
 export function ExperiencesSection() {

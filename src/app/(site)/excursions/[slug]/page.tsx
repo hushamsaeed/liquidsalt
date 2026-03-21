@@ -43,7 +43,13 @@ export default function ExcursionPage({ params }: PageProps) {
       <Nav />
       <main>
         {/* Hero */}
-        <section className="relative bg-gradient-to-b from-ocean-navy via-reef-teal to-night-dive pt-32 pb-20">
+        <section className="relative bg-gradient-to-b from-ocean-navy via-reef-teal to-night-dive pt-32 pb-20 overflow-hidden">
+          {excursion.heroImage && (
+            <>
+              <img src={excursion.heroImage} alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+              <div className="absolute inset-0 bg-gradient-to-b from-ocean-navy/60 via-ocean-navy/40 to-night-dive/80" />
+            </>
+          )}
           <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
             <span className="inline-block mb-4 bg-coral-gold text-white px-4 py-1 rounded-full text-badge uppercase">
               Excursion

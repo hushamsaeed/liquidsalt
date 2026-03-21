@@ -11,6 +11,7 @@ const PACKAGES = [
     badge: "Most Popular",
     priceFrom: 450,
     featured: true,
+    image: "/images/packages/manta-madness.webp",
     inclusions: [
       "3 Hanifaru Bay snorkel trips",
       "2 guided reef dives",
@@ -23,6 +24,7 @@ const PACKAGES = [
     title: "Dive Dive Dive",
     slug: "dive-dive-dive",
     priceFrom: 380,
+    image: "/images/packages/dive-dive-dive.webp",
     inclusions: [
       "6 guided reef dives",
       "Full equipment hire",
@@ -34,6 +36,7 @@ const PACKAGES = [
     title: "Dive Hanifaru",
     slug: "dive-hanifaru",
     priceFrom: 520,
+    image: "/images/packages/dive-hanifaru.webp",
     inclusions: [
       "2 Hanifaru Bay dives",
       "2 premium reef dives",

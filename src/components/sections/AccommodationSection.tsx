@@ -8,21 +8,25 @@ const PROPERTIES = [
     name: "Aveyla Manta Village",
     description: "Beachfront guesthouse with ocean-facing rooms, rooftop terrace, and direct beach access.",
     bookingUrl: "#",
+    image: "/images/accommodation/aveyla-manta-village.webp",
   },
   {
     name: "Kiha Beach",
     description: "Boutique hotel steps from the harbour. Modern rooms with island-style décor.",
     bookingUrl: "#",
+    image: "/images/accommodation/kiha-beach.webp",
   },
   {
     name: "Lvis Blancura",
     description: "Contemporary guesthouse with a pool, dive-friendly facilities, and sunset views.",
     bookingUrl: "#",
+    image: "/images/accommodation/lvis-blancura.webp",
   },
   {
     name: "Chak'z Beach",
     description: "Budget-friendly beachside option with warm hospitality and home-cooked Maldivian meals.",
     bookingUrl: "#",
+    image: "/images/accommodation/chakz-beach.webp",
   },
 ];
 

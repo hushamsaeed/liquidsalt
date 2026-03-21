@@ -67,24 +67,19 @@ export function MantaMadness() {
             </div>
           </motion.div>
 
-          {/* Right side — cinematic image area */}
+          {/* Right side — cinematic manta image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative aspect-[3/4] lg:aspect-auto lg:h-[600px] rounded-lg overflow-hidden"
           >
-            {/* Placeholder gradient — replace with manta photography */}
-            <div className="absolute inset-0 bg-gradient-to-t from-night-dive via-ocean-navy to-reef-teal opacity-60" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <svg className="w-24 h-24 text-salt-white/20 mx-auto" fill="none" viewBox="0 0 100 100" aria-hidden="true">
-                  <path d="M50 20 C30 20 10 40 10 50 C10 60 25 75 50 80 C75 75 90 60 90 50 C90 40 70 20 50 20Z" stroke="currentColor" strokeWidth="2" />
-                  <circle cx="35" cy="45" r="3" fill="currentColor" />
-                </svg>
-                <p className="text-salt-white/30 text-sm mt-4">Manta ray imagery</p>
-              </div>
-            </div>
+            <img
+              src="/images/sections/manta-madness-feature.webp"
+              alt="Manta ray silhouetted against ocean surface light at Hanifaru Bay"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-night-dive/40 to-transparent" />
           </motion.div>
         </div>
       </div>

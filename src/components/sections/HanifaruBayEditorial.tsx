@@ -10,24 +10,28 @@ const SPECIES = [
     scientificName: "Mobula alfredi",
     description: "The star of Hanifaru Bay. Aggregations of 100+ during cyclone feeding events — one of the greatest marine spectacles on Earth.",
     season: "May — November",
+    image: "/images/species/reef-manta-ray.webp",
   },
   {
     name: "Whale Shark",
     scientificName: "Rhincodon typus",
     description: "The world's largest fish. Regular sightings in Baa Atoll channels during the southwest monsoon plankton bloom.",
     season: "May — November",
+    image: "/images/species/whale-shark.webp",
   },
   {
     name: "Eagle Ray",
     scientificName: "Aetobatus narinari",
     description: "Spotted eagles cruise the sandy channels between reefs. Often seen in groups of 3–8 at cleaning stations.",
     season: "Year-round",
+    image: "/images/species/eagle-ray.webp",
   },
   {
     name: "Grey Reef Shark",
     scientificName: "Carcharhinus amblyrhynchos",
     description: "Resident reef predator at channel dive sites. A constant, graceful presence on almost every dive.",
     season: "Year-round",
+    image: "/images/species/grey-reef-shark.webp",
   },
 ];
 

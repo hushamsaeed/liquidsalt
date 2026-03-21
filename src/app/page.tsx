@@ -20,7 +20,7 @@ export default function HomePage() {
 
       <main id="main-content">
         {/* 01 — Hero: The Surface */}
-        <Hero />
+        <Hero imageSrc="/images/heroes/homepage.webp" />
 
         {/* 02 — Credential Strip */}
         <CredentialStrip />

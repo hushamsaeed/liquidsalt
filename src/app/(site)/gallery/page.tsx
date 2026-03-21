@@ -19,18 +19,18 @@ interface GalleryItem {
 const CATEGORIES: Category[] = ["All", "Underwater", "Above Water", "Marine Life", "Island"];
 
 const GALLERY_ITEMS: GalleryItem[] = [
-  { id: 1, src: "/images/gallery/underwater-01.jpg", alt: "Manta ray gliding over the reef at Hanifaru Bay", category: "Underwater" },
-  { id: 2, src: "/images/gallery/underwater-02.jpg", alt: "Divers exploring a coral garden in Baa Atoll", category: "Underwater" },
-  { id: 3, src: "/images/gallery/underwater-03.jpg", alt: "Night dive revealing bioluminescent plankton", category: "Underwater" },
-  { id: 4, src: "/images/gallery/above-water-01.jpg", alt: "Dhoni boat at sunset in the Maldives", category: "Above Water" },
-  { id: 5, src: "/images/gallery/above-water-02.jpg", alt: "Divers gearing up on the boat deck", category: "Above Water" },
-  { id: 6, src: "/images/gallery/above-water-03.jpg", alt: "Golden hour over Dharavandhoo harbour", category: "Above Water" },
-  { id: 7, src: "/images/gallery/marine-life-01.jpg", alt: "Hawksbill turtle resting on soft coral", category: "Marine Life" },
-  { id: 8, src: "/images/gallery/marine-life-02.jpg", alt: "Whale shark feeding near the surface", category: "Marine Life" },
-  { id: 9, src: "/images/gallery/marine-life-03.jpg", alt: "Clownfish nestled in a vibrant anemone", category: "Marine Life" },
-  { id: 10, src: "/images/gallery/island-01.jpg", alt: "Aerial view of Dharavandhoo island", category: "Island" },
-  { id: 11, src: "/images/gallery/island-02.jpg", alt: "Palm-fringed sandbank at low tide", category: "Island" },
-  { id: 12, src: "/images/gallery/island-03.jpg", alt: "Crystal clear lagoon from the jetty", category: "Island" },
+  { id: 1, src: "/images/gallery/underwater-01.webp", alt: "Manta ray gliding over the reef at Hanifaru Bay", category: "Underwater" },
+  { id: 2, src: "/images/gallery/underwater-02.webp", alt: "Divers exploring a coral garden in Baa Atoll", category: "Underwater" },
+  { id: 3, src: "/images/gallery/underwater-03.webp", alt: "Night dive revealing bioluminescent plankton", category: "Underwater" },
+  { id: 4, src: "/images/gallery/above-water-01.webp", alt: "Dhoni boat at sunset in the Maldives", category: "Above Water" },
+  { id: 5, src: "/images/gallery/above-water-02.webp", alt: "Divers gearing up on the boat deck", category: "Above Water" },
+  { id: 6, src: "/images/gallery/above-water-03.webp", alt: "Golden hour over Dharavandhoo harbour", category: "Above Water" },
+  { id: 7, src: "/images/gallery/marine-life-01.webp", alt: "Hawksbill turtle resting on soft coral", category: "Marine Life" },
+  { id: 8, src: "/images/gallery/marine-life-02.webp", alt: "Whale shark feeding near the surface", category: "Marine Life" },
+  { id: 9, src: "/images/gallery/marine-life-03.webp", alt: "Clownfish nestled in a vibrant anemone", category: "Marine Life" },
+  { id: 10, src: "/images/gallery/island-01.webp", alt: "Aerial view of Dharavandhoo island", category: "Island" },
+  { id: 11, src: "/images/gallery/island-02.webp", alt: "Palm-fringed sandbank at low tide", category: "Island" },
+  { id: 12, src: "/images/gallery/island-03.webp", alt: "Crystal clear lagoon from the jetty", category: "Island" },
 ];
 
 export default function GalleryPage() {
