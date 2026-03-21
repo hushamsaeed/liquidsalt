@@ -1,0 +1,11 @@
+node_modules
+.next
+.git
+_intake
+tasks
+designs
+docs
+.claude
+*.md
+!README.md
+.env*
