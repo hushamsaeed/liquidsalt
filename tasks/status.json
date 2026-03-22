@@ -1,9 +1,9 @@
 {
-  "project": "Liquid Salt Divers \u2014 Website Redesign",
+  "project": "Liquid Salt Divers — Website Redesign",
   "current_phase": 8,
   "total_phases": 7,
-  "status": "complete",
-  "last_updated": "2026-03-21 22:44",
+  "status": "deployed",
+  "last_updated": "2026-03-22 11:50",
   "error_count": 0,
-  "notes": "All 7 phases complete. Site ready for deployment."
+  "notes": "All 7 phases complete. Deployed to Dokploy. Sanity CMS connected (bs3v46tq). 38 docs seeded. 40 Gemini images. ISR 60s. Cinematic redesign applied. Homepage redesign with parallax, caustics, flip cards, expandable packages."
 }
