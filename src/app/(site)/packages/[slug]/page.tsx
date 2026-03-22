@@ -7,6 +7,7 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
+import { VariantSelector } from "@/components/ui/VariantSelector";
 import { STATIC_PACKAGES } from "@/lib/data/packages";
 import { sanityFetch } from "@/lib/sanity/fetch";
 import { packageBySlugQuery, packageSlugsQuery } from "@/lib/sanity/queries";
@@ -60,6 +61,7 @@ export default async function PackagePage({ params }: PageProps) {
   if (!pkg) notFound();
 
   const otherPackages = STATIC_PACKAGES.filter((p) => p.slug.current !== params.slug);
+  const hasVariants = pkg.variants && pkg.variants.length > 0;
 
   return (
     <>
@@ -83,6 +85,9 @@ export default async function PackagePage({ params }: PageProps) {
             {pkg.tagline && (
               <p className="mt-4 text-lg text-salt-white/80">{pkg.tagline}</p>
             )}
+            {pkg.season && (
+              <p className="mt-2 text-sm text-salt-white/60 uppercase tracking-wider">{pkg.season}</p>
+            )}
             <div className="mt-6">
               <span className="text-sm text-salt-white/60">from </span>
               <span className="text-4xl font-bold text-coral-gold">${pkg.priceFrom}</span>
@@ -93,9 +98,9 @@ export default async function PackagePage({ params }: PageProps) {
 
         {/* Content */}
         <section className="py-space-12 lg:py-space-16">
-          <div className="mx-auto max-w-4xl px-6">
+          <div className="mx-auto max-w-5xl px-6">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-              {/* Description */}
+              {/* Main content */}
               <div className="lg:col-span-2">
                 <h2 className="font-display text-3xl text-ocean-navy mb-6">About This Package</h2>
                 <p className="text-ocean-navy/80 leading-relaxed">{pkg.descriptionText}</p>
@@ -107,6 +112,16 @@ export default async function PackagePage({ params }: PageProps) {
                       <path d="M10 6v4l2.5 2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                     </svg>
                     <span className="font-medium">Duration: {pkg.duration}</span>
+                  </div>
+                )}
+
+                {/* Variant selector with pricing tables */}
+                {hasVariants && (
+                  <div className="mt-12">
+                    <VariantSelector
+                      variants={pkg.variants}
+                      packageTitle={pkg.title}
+                    />
                   </div>
                 )}
               </div>

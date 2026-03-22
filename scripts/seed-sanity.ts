@@ -22,6 +22,10 @@ const client = createClient({
   token,
 });
 
+// Helper: generate _key for Sanity array items
+let keyCounter = 0;
+const key = () => `k${++keyCounter}`;
+
 // ── Package Data ──
 const packages = [
   {
@@ -30,19 +34,20 @@ const packages = [
     title: "Manta Madness",
     slug: { _type: "slug", current: "manta-madness" },
     tagline: "The ultimate Hanifaru Bay snorkel experience",
-    priceFrom: 450,
+    season: "June - November",
+    priceFrom: 720,
     pricePer: "person",
     badge: "Most Popular",
     featured: true,
-    duration: "3 days",
+    duration: "3–7 nights",
     order: 1,
     inclusions: [
-      "3 Hanifaru Bay snorkel trips",
-      "2 guided reef dives",
-      "Full equipment hire",
-      "Boat transfers included",
-      "Marine biologist briefing",
-      "Underwater photography tips",
+      "Accommodation in preferred room category",
+      "Full board Meals (Breakfast, Lunch and Dinner)",
+      "Manta Snorkeling trips",
+      "Return Transfer Male | Dharavandhoo | Male by Domestic Plane",
+      "10% Service Charge and 17% TGST included",
+      "Green tax $6 per day per person",
     ],
     description: [
       {
@@ -53,10 +58,37 @@ const packages = [
           {
             _type: "span",
             _key: "s1",
-            text: "Manta Madness is our flagship package — designed for those who have travelled to Baa Atoll for one reason: manta rays. Over three days, you will make three trips to Hanifaru Bay during peak aggregation conditions, guided by our most experienced instructors who know the bay's currents intimately. Between snorkel sessions, you will dive two of the best reef sites in the atoll, encountering reef sharks, eagle rays, and the technicolour coral gardens that make this UNESCO biosphere unique.",
+            text: "Embark on an unforgettable aquatic adventure with our exclusive snorkelling package \"Manta Madness\". Nestled in the pristine beauty of Baa Atoll, this package offers the perfect blend of luxury, exploration, and awe-inspiring marine encounters.",
           },
         ],
       },
+    ],
+    variants: [
+      { _key: key(), nights: 3, activities: "2 Manta Snorkeling", subtitle: "Enjoy 3 nights on full board basis in one of our beautiful rooms and join us for 2 Manta Snorkelling trips", roomPricing: [
+        { _key: key(), roomType: "Village Deluxe Room", twinShare: 720, single: 969 },
+        { _key: key(), roomType: "Beach Deluxe Room", twinShare: 818, single: 1144 },
+        { _key: key(), roomType: "Ocean Deluxe Room", twinShare: 818, single: 1144 },
+      ]},
+      { _key: key(), nights: 4, activities: "2 Manta Snorkeling", subtitle: "Enjoy 4 nights on full board basis in one of our beautiful rooms and join us for 2 Manta Snorkelling trips", roomPricing: [
+        { _key: key(), roomType: "Village Deluxe Room", twinShare: 810, single: 1135 },
+        { _key: key(), roomType: "Beach Deluxe Room", twinShare: 929, single: 1375 },
+        { _key: key(), roomType: "Ocean Deluxe Room", twinShare: 929, single: 1375 },
+      ]},
+      { _key: key(), nights: 5, activities: "3 Manta Snorkeling", subtitle: "Enjoy 5 nights on full board basis in one of our beautiful rooms and join us for 3 Manta Snorkeling trips", roomPricing: [
+        { _key: key(), roomType: "Village Deluxe Room", twinShare: 970, single: 1377 },
+        { _key: key(), roomType: "Beach Deluxe Room", twinShare: 1119, single: 1677 },
+        { _key: key(), roomType: "Ocean Deluxe Room", twinShare: 1119, single: 1677 },
+      ]},
+      { _key: key(), nights: 6, activities: "4 Manta Snorkeling", subtitle: "Enjoy 6 nights on full board basis in one of our beautiful rooms and join us for 4 Manta Snorkeling trips", roomPricing: [
+        { _key: key(), roomType: "Village Deluxe Room", twinShare: 1130, single: 1620 },
+        { _key: key(), roomType: "Beach Deluxe Room", twinShare: 1310, single: 1977 },
+        { _key: key(), roomType: "Ocean Deluxe Room", twinShare: 1310, single: 1977 },
+      ]},
+      { _key: key(), nights: 7, activities: "4 Manta Snorkeling", subtitle: "Enjoy 7 nights on full board basis in one of our beautiful rooms and join us for 4 Manta Snorkeling trips", roomPricing: [
+        { _key: key(), roomType: "Village Deluxe Room", twinShare: 1220, single: 1789 },
+        { _key: key(), roomType: "Beach Deluxe Room", twinShare: 1429, single: 2200 },
+        { _key: key(), roomType: "Ocean Deluxe Room", twinShare: 1429, single: 2200 },
+      ]},
     ],
   },
   {
@@ -64,18 +96,19 @@ const packages = [
     _id: "pkg-dive-dive-dive",
     title: "Dive Dive Dive",
     slug: { _type: "slug", current: "dive-dive-dive" },
-    tagline: "Six dives across the best reefs in Baa Atoll",
-    priceFrom: 380,
+    tagline: "Immerse yourself in the wonders of Baa Atoll",
+    priceFrom: 1020,
     pricePer: "person",
     featured: false,
-    duration: "4 days",
+    duration: "3–7 nights",
     order: 2,
     inclusions: [
-      "6 guided reef dives",
-      "Full equipment hire",
-      "Boat transfers included",
-      "Dive log signed by instructor",
-      "Channel and reef site mix",
+      "Accommodation in preferred room category",
+      "Full board Meals (Breakfast, Lunch and Dinner)",
+      "Local area dives (Tank and Weights Only)",
+      "Return Transfer Male | Dharavandhoo | Male by Domestic Plane",
+      "10% Service Charge and 17% TGST included",
+      "Green tax $6 per day per person",
     ],
     description: [
       {
@@ -86,10 +119,37 @@ const packages = [
           {
             _type: "span",
             _key: "s1",
-            text: "For certified divers who want to maximise bottom time. Six dives over four days, carefully selected to showcase the full range of Baa Atoll's underwater landscapes: channel drifts where grey reef sharks patrol, thilas carpeted in soft coral, and cleaning stations where manta rays hover motionless while cleaner wrasse do their work.",
+            text: "Immerse yourself in the wonders of Baa Atoll with our Dive Dive Dive Package. Enjoy full-board accommodations, hassle-free domestic flights, thrilling scuba dives at affordable prices. Explore vibrant coral reefs and marine life in this UNESCO Biosphere Reserve.",
           },
         ],
       },
+    ],
+    variants: [
+      { _key: key(), nights: 3, activities: "6 Dives", subtitle: "Enjoy 3 nights on full board basis in one of our beautiful rooms and join our scheduled boat dive trips for 6 spectacular dives", roomPricing: [
+        { _key: key(), roomType: "Village Deluxe Room", twinShare: 1020, single: 1259 },
+        { _key: key(), roomType: "Beach Deluxe Room", twinShare: 1110, single: 1439 },
+        { _key: key(), roomType: "Ocean Deluxe Room", twinShare: 1110, single: 1439 },
+      ]},
+      { _key: key(), nights: 4, activities: "8 Dives", subtitle: "Enjoy 4 nights on full board basis in one of our beautiful rooms and join our scheduled boat dive trips for 8 spectacular dives", roomPricing: [
+        { _key: key(), roomType: "Village Deluxe Room", twinShare: 1249, single: 1576 },
+        { _key: key(), roomType: "Beach Deluxe Room", twinShare: 1369, single: 1818 },
+        { _key: key(), roomType: "Ocean Deluxe Room", twinShare: 1369, single: 1818 },
+      ]},
+      { _key: key(), nights: 5, activities: "10 Dives", subtitle: "Enjoy 5 nights on full board basis in one of our beautiful rooms and join our scheduled boat dive trips for 10 spectacular dives", roomPricing: [
+        { _key: key(), roomType: "Village Deluxe Room", twinShare: 1459, single: 1865 },
+        { _key: key(), roomType: "Beach Deluxe Room", twinShare: 1610, single: 2159 },
+        { _key: key(), roomType: "Ocean Deluxe Room", twinShare: 1610, single: 2159 },
+      ]},
+      { _key: key(), nights: 6, activities: "12 Dives", subtitle: "Enjoy 6 nights on full board basis in one of our beautiful rooms and join our scheduled boat dive trips for 12 spectacular dives", roomPricing: [
+        { _key: key(), roomType: "Village Deluxe Room", twinShare: 1688, single: 2177 },
+        { _key: key(), roomType: "Beach Deluxe Room", twinShare: 1865, single: 2529 },
+        { _key: key(), roomType: "Ocean Deluxe Room", twinShare: 1865, single: 2529 },
+      ]},
+      { _key: key(), nights: 7, activities: "14 Dives", subtitle: "Enjoy 7 nights on full board basis in one of our beautiful rooms and join our scheduled boat dive trips for 14 spectacular dives", roomPricing: [
+        { _key: key(), roomType: "Village Deluxe Room", twinShare: 1919, single: 2488 },
+        { _key: key(), roomType: "Beach Deluxe Room", twinShare: 2125, single: 2899 },
+        { _key: key(), roomType: "Ocean Deluxe Room", twinShare: 2125, single: 2899 },
+      ]},
     ],
   },
   {
@@ -97,19 +157,21 @@ const packages = [
     _id: "pkg-dive-hanifaru",
     title: "Dive Hanifaru",
     slug: { _type: "slug", current: "dive-hanifaru" },
-    tagline: "Scuba dive Hanifaru Bay with the experts",
-    priceFrom: 520,
+    tagline: "The perfect blend of scuba diving and manta snorkelling",
+    season: "June - November",
+    priceFrom: 1020,
     pricePer: "person",
     featured: false,
-    duration: "3 days",
+    duration: "3–7 nights",
     order: 3,
     inclusions: [
-      "2 Hanifaru Bay dives",
-      "2 premium reef dives",
-      "1 night dive experience",
-      "Full equipment hire",
-      "Underwater photography tips",
-      "Boat transfers included",
+      "Accommodation in preferred room category",
+      "Full board Meals (Breakfast, Lunch and Dinner)",
+      "Spectacular Dives (Tanks and Weights only)",
+      "Manta Snorkeling trips",
+      "Return Transfer Male | Dharavandhoo | Male by Domestic Plane",
+      "10% Service Charge and 17% TGST included",
+      "Green tax $6 per day per person",
     ],
     description: [
       {
@@ -120,10 +182,37 @@ const packages = [
           {
             _type: "span",
             _key: "s1",
-            text: "The definitive Hanifaru experience for scuba divers. Two dives inside Hanifaru Bay itself — where conditions permit — combined with two premium reef dives and a spectacular night dive. Requires Advanced Open Water certification or equivalent.",
+            text: "Introducing the Dive Hanifaru Package — an immersive and unforgettable experience for enthusiasts seeking the perfect blend of excitement and relaxation. We at Liquid Salt Divers invite you to embark on a journey that combines the thrill of scuba diving in the pristine Baa Atoll with the mesmerising beauty of snorkeling alongside majestic Mantas in Hanifaru Bay.",
           },
         ],
       },
+    ],
+    variants: [
+      { _key: key(), nights: 3, activities: "4 Dives + 2 Manta Snorkeling", subtitle: "Enjoy 3 nights on full board basis in one of our beautiful rooms and join us on 4 of our scheduled boat dives and 2 Manta Snorkelling trips", roomPricing: [
+        { _key: key(), roomType: "Village Deluxe Room", twinShare: 1020, single: 1255 },
+        { _key: key(), roomType: "Beach Deluxe Room", twinShare: 1110, single: 1434 },
+        { _key: key(), roomType: "Ocean Deluxe Room", twinShare: 1110, single: 1434 },
+      ]},
+      { _key: key(), nights: 4, activities: "6 Dives + 2 Manta Snorkeling", subtitle: "Enjoy 4 nights on full board basis in one of our beautiful rooms and join us on 6 of our scheduled boat dives and 2 Manta Snorkelling trips", roomPricing: [
+        { _key: key(), roomType: "Village Deluxe Room", twinShare: 1249, single: 1579 },
+        { _key: key(), roomType: "Beach Deluxe Room", twinShare: 1366, single: 1810 },
+        { _key: key(), roomType: "Ocean Deluxe Room", twinShare: 1366, single: 1810 },
+      ]},
+      { _key: key(), nights: 5, activities: "9 Dives + 3 Manta Snorkeling", subtitle: "Enjoy 5 nights on full board basis in one of our beautiful rooms and join us on 9 of our scheduled boat dives and 3 Manta Snorkelling trips", roomPricing: [
+        { _key: key(), roomType: "Village Deluxe Room", twinShare: 1626, single: 2030 },
+        { _key: key(), roomType: "Beach Deluxe Room", twinShare: 1777, single: 2329 },
+        { _key: key(), roomType: "Ocean Deluxe Room", twinShare: 1777, single: 2329 },
+      ]},
+      { _key: key(), nights: 6, activities: "12 Dives + 4 Manta Snorkeling", subtitle: "Enjoy 6 nights on full board basis in one of our beautiful rooms and join us on 12 of our scheduled boat dives and 4 Manta Snorkelling trips", roomPricing: [
+        { _key: key(), roomType: "Village Deluxe Room", twinShare: 1977, single: 2510 },
+        { _key: key(), roomType: "Beach Deluxe Room", twinShare: 2155, single: 2818 },
+        { _key: key(), roomType: "Ocean Deluxe Room", twinShare: 2155, single: 2818 },
+      ]},
+      { _key: key(), nights: 7, activities: "14 Dives + 4 Manta Snorkeling", subtitle: "Enjoy 7 nights on full board basis in one of our beautiful rooms and join us on 14 of our scheduled boat dives and 4 Manta Snorkeling trips", roomPricing: [
+        { _key: key(), roomType: "Village Deluxe Room", twinShare: 2210, single: 2777 },
+        { _key: key(), roomType: "Beach Deluxe Room", twinShare: 2410, single: 3189 },
+        { _key: key(), roomType: "Ocean Deluxe Room", twinShare: 2410, single: 3189 },
+      ]},
     ],
   },
 ];

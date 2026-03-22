@@ -4,15 +4,17 @@ import { groq } from "next-sanity";
 export const allPackagesQuery = groq`
   *[_type == "package"] | order(order asc) {
     _id, title, slug, tagline, cardImage, priceFrom, pricePer,
-    badge, inclusions, duration, featured, order
+    badge, inclusions, duration, season, featured, order,
+    variants[] { nights, activities, subtitle, inclusions, roomPricing[] { roomType, twinShare, single } }
   }
 `;
 
 export const packageBySlugQuery = groq`
   *[_type == "package" && slug.current == $slug][0] {
-    _id, title, slug, tagline, heroImage, cardImage,
+    _id, title, slug, tagline, season, heroImage, cardImage,
     priceFrom, pricePer, badge, inclusions, description,
-    duration, featured
+    duration, featured,
+    variants[] { nights, activities, subtitle, inclusions, roomPricing[] { roomType, twinShare, single } }
   }
 `;
 

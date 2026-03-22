@@ -24,6 +24,12 @@ export const packageSchema = defineType({
       type: "string",
     }),
     defineField({
+      name: "season",
+      title: "Season",
+      type: "string",
+      description: 'e.g. "June - November" or "Year-round"',
+    }),
+    defineField({
       name: "heroImage",
       title: "Hero Image",
       type: "image",
@@ -39,6 +45,7 @@ export const packageSchema = defineType({
       name: "priceFrom",
       title: "Price From (USD)",
       type: "number",
+      description: "Lowest starting price across all variants (auto-set or manual)",
       validation: (Rule) => Rule.required().min(0),
     }),
     defineField({
@@ -55,9 +62,10 @@ export const packageSchema = defineType({
     }),
     defineField({
       name: "inclusions",
-      title: "Inclusions",
+      title: "Common Inclusions",
       type: "array",
       of: [{ type: "string" }],
+      description: "Inclusions shared across all variants",
     }),
     defineField({
       name: "description",
@@ -69,6 +77,95 @@ export const packageSchema = defineType({
       name: "duration",
       title: "Duration",
       type: "string",
+      description: "Summary duration e.g. '3–7 nights'",
+    }),
+    defineField({
+      name: "variants",
+      title: "Package Variants",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          name: "packageVariant",
+          title: "Variant",
+          fields: [
+            defineField({
+              name: "nights",
+              title: "Nights",
+              type: "number",
+              validation: (Rule) => Rule.required().min(1),
+            }),
+            defineField({
+              name: "activities",
+              title: "Activities Summary",
+              type: "string",
+              description: 'e.g. "6 Dives" or "2 Manta Snorkeling" or "4 Dives + 2 Manta Snorkeling"',
+            }),
+            defineField({
+              name: "subtitle",
+              title: "Subtitle",
+              type: "string",
+              description: "Short description of this variant",
+            }),
+            defineField({
+              name: "inclusions",
+              title: "Variant-Specific Inclusions",
+              type: "array",
+              of: [{ type: "string" }],
+            }),
+            defineField({
+              name: "roomPricing",
+              title: "Room Pricing",
+              type: "array",
+              of: [
+                {
+                  type: "object",
+                  name: "roomPrice",
+                  title: "Room Price",
+                  fields: [
+                    defineField({
+                      name: "roomType",
+                      title: "Room Type",
+                      type: "string",
+                      validation: (Rule) => Rule.required(),
+                    }),
+                    defineField({
+                      name: "twinShare",
+                      title: "Twin Share (USD per person)",
+                      type: "number",
+                      validation: (Rule) => Rule.required().min(0),
+                    }),
+                    defineField({
+                      name: "single",
+                      title: "Single (USD per person)",
+                      type: "number",
+                      validation: (Rule) => Rule.required().min(0),
+                    }),
+                  ],
+                  preview: {
+                    select: { title: "roomType", twin: "twinShare", single: "single" },
+                    prepare({ title, twin, single }) {
+                      return {
+                        title: title || "Room",
+                        subtitle: `Twin: $${twin} | Single: $${single}`,
+                      };
+                    },
+                  },
+                },
+              ],
+            }),
+          ],
+          preview: {
+            select: { nights: "nights", activities: "activities" },
+            prepare({ nights, activities }) {
+              return {
+                title: `${nights} Nights`,
+                subtitle: activities || "",
+              };
+            },
+          },
+        },
+      ],
     }),
     defineField({
       name: "featured",

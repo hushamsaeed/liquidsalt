@@ -6,11 +6,26 @@ export interface SanityImage {
   hotspot?: { x: number; y: number; height: number; width: number };
 }
 
+export interface RoomPrice {
+  roomType: string;
+  twinShare: number;
+  single: number;
+}
+
+export interface PackageVariant {
+  nights: number;
+  activities?: string;
+  subtitle?: string;
+  inclusions?: string[];
+  roomPricing?: RoomPrice[];
+}
+
 export interface Package {
   _id: string;
   title: string;
   slug: Slug;
   tagline?: string;
+  season?: string;
   heroImage?: SanityImage;
   cardImage?: SanityImage;
   priceFrom: number;
@@ -19,6 +34,7 @@ export interface Package {
   inclusions?: string[];
   description?: PortableTextBlock[];
   duration?: string;
+  variants?: PackageVariant[];
   featured?: boolean;
   order?: number;
 }
