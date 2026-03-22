@@ -309,6 +309,35 @@ const species = [
   description: [{ _type: "block", _key: "d1", style: "normal", children: [{ _type: "span", _key: "s1", text: s.description }] }],
 }));
 
+// ── Dive Sites ──
+const diveSites = [
+  { _id: "ds-hanifaru-bay", name: "Hanifaru Bay", slug: "hanifaru-bay", depth: "5–15m", siteType: "Bay / Aggregation Site", difficulty: "All Levels", season: "June – November", order: 1, description: "The main event. UNESCO-protected bay where plankton-rich currents trigger cyclone feeding aggregations of 200+ manta rays. Snorkelling and diving permitted with licensed guides only. During peak season, whale sharks join the mantas in one of the greatest marine spectacles on Earth.", highlights: ["Manta ray aggregations", "Whale shark sightings", "UNESCO protected"], marineLife: ["Reef manta ray", "Whale shark", "Mobula ray", "Plankton schools"] },
+  { _id: "ds-dhonfanu-thila", name: "Dhonfanu Thila", slug: "dhonfanu-thila", depth: "7–25m", siteType: "Thila (Submerged Pinnacle)", difficulty: "Intermediate", season: "Year-round", order: 2, description: "An oval-shaped underwater pinnacle with a dramatic swim-through canyon at 25m. The current splits around the point, drawing in massive schools of fusiliers, yellow-lined snapper, and red-toothed triggerfish. Grey reef sharks patrol the deeper edges while manta rays visit the cleaning station in season.", highlights: ["Swim-through canyon", "Grey reef sharks", "Manta cleaning station", "Massive fish schools"], marineLife: ["Grey reef shark", "Manta ray", "Eagle ray", "Barracuda", "Fusilier schools"] },
+  { _id: "ds-dharavandhoo-corner", name: "Dharavandhoo Corner", slug: "dharavandhoo-corner", depth: "10–25m", siteType: "Channel / Reef", difficulty: "All Levels", season: "Year-round", order: 3, description: "Our house reef and a favourite for relaxed afternoon dives. A sloping reef wall with overhangs sheltering nurse sharks, moray eels, and the occasional eagle ray. Easy access from the island makes it perfect for checkout dives and night dives.", highlights: ["House reef", "Nurse sharks", "Eagle rays", "Easy access from island"], marineLife: ["Nurse shark", "Eagle ray", "Moray eel", "Lionfish", "Octopus"] },
+  { _id: "ds-nelivaru-haa", name: "Nelivaru Haa", slug: "nelivaru-haa", depth: "14–30m", siteType: "Channel", difficulty: "Intermediate", season: "Year-round", order: 4, description: "A channel dive best done as a drift. Unique topography with star-shaped canyons, caves, and overhangs to explore in search of stingrays, large groupers, batfish, and schools of oriental sweetlips. Manta rays visit the cleaning stations here year-round.", highlights: ["Manta cleaning station", "Drift diving", "Caves and overhangs", "Year-round mantas"], marineLife: ["Manta ray", "Grouper", "Batfish", "Oriental sweetlips", "Stingray"] },
+  { _id: "ds-maavaru-kandu", name: "Maavaru Kandu", slug: "maavaru-kandu", depth: "8–28m", siteType: "Channel", difficulty: "Intermediate", season: "Year-round", order: 5, description: "Wide channel with excellent visibility and reliable current. The reef top at 8m features dramatic overhangs decorated with soft corals in pastel blues, yellows, and greens. White-tip reef sharks rest on the sandy bottom while Napoleon wrasse cruise the reef edge.", highlights: ["Pastel soft corals", "White-tip reef sharks", "Napoleon wrasse", "Excellent visibility"], marineLife: ["White-tip reef shark", "Napoleon wrasse", "Midnight snapper", "Moon fusilier", "Coral rock cod"] },
+  { _id: "ds-kudalhavahaa-thila", name: "Kudalhavahaa Thila", slug: "kudalhavahaa-thila", depth: "8–25m", siteType: "Thila", difficulty: "All Levels", season: "Year-round", order: 6, description: "A compact thila surrounded by deep blue. The reef top at 8m is perfect for safety stops, with hawksbill turtles often seen grazing on the sponges.", highlights: ["Hawksbill turtles", "Compact reef", "Great for photography"], marineLife: ["Hawksbill turtle", "Nudibranch", "Anemonefish", "Blue-striped snapper"] },
+  { _id: "ds-dharavandhoo-thila", name: "Dharavandhoo Thila", slug: "dharavandhoo-thila", depth: "5–25m", siteType: "Thila", difficulty: "All Levels", season: "Year-round", order: 7, description: "A narrow curved thila connected to the main reef, just metres from Dharavandhoo island. Divided into two sections — the inside face shelters garden eels and gobies on sandy patches, while the outside atoll face features sea fans, scorpionfish, and blue-striped snappers.", highlights: ["Two distinct reef faces", "Garden eels", "Sea fans", "Close to island"], marineLife: ["Garden eel", "Scorpionfish", "Lionfish", "Moray eel", "Blue-striped snapper", "Grouper"] },
+  { _id: "ds-dhigali-haa", name: "Dhigali Haa", slug: "dhigali-haa", depth: "7–25m", siteType: "Protected Thila", difficulty: "All Levels", season: "Year-round", order: 8, description: "A long, narrow reef and marine protected area — a photographer's favourite. The shallow reef top is carpeted in colourful soft corals and sponges, with frogfish hiding among them. Deeper down, barracuda and jacks patrol while hawksbill turtles glide between the black coral trees.", highlights: ["Marine protected area", "Photographer's paradise", "Frogfish", "Black corals"], marineLife: ["Frogfish", "Hawksbill turtle", "Barracuda", "Jack", "Napoleon wrasse", "Soft corals"] },
+  { _id: "ds-anga-faru", name: "Anga Faru", slug: "anga-faru", depth: "10–30m", siteType: "Conservation Area", difficulty: "Intermediate", season: "Year-round (shark peak: Jan–Mar)", order: 9, description: "Known as the \"birthplace of grey reef sharks\" — this conservation area shelters dozens of grey reef sharks and two-metre nurse sharks in its protected waters. Drift diving along the reef edge brings encounters with eagle rays, tuna, and walls of snapper.", highlights: ["Grey reef shark nursery", "Nurse sharks", "Drift diving", "Eagle rays"], marineLife: ["Grey reef shark", "Nurse shark", "Eagle ray", "Tuna", "Snapper schools"] },
+  { _id: "ds-christmas-tree", name: "Christmas Tree", slug: "christmas-tree", depth: "15–30m", siteType: "Reef", difficulty: "Advanced", season: "Year-round", order: 10, description: "Named for its bizarrely-shaped reef formation resembling a Christmas tree. A vibrant, brightly coloured reef full of alluring critters — nudibranchs, flatworms, and delicate micro life compete for attention with the white-tip reef sharks resting below.", highlights: ["Unique reef formation", "Macro photography", "White-tip reef sharks", "Nudibranchs"], marineLife: ["White-tip reef shark", "Nudibranch", "Flatworm", "Frogfish", "Ghost pipefish"] },
+  { _id: "ds-kakani-thila", name: "Kakani Thila", slug: "kakani-thila", depth: "10–30m", siteType: "Thila", difficulty: "Intermediate", season: "Year-round (hammerheads: Dec–Apr)", order: 11, description: "A remote pinnacle rising from the deep blue with pristine hard coral gardens on its crown. Schools of bannerfish and pyramid butterflyfish cloud the water column while barracuda circle at the edge of visibility.", highlights: ["Pristine hard corals", "Schooling bannerfish", "Barracuda", "Hammerhead sightings"], marineLife: ["Barracuda", "Bannerfish", "Pyramid butterflyfish", "Hammerhead shark", "Trevally"] },
+  { _id: "ds-horubadhoo-thila", name: "Horubadhoo Thila", slug: "horubadhoo-thila", depth: "12–28m", siteType: "Thila", difficulty: "Intermediate", season: "Year-round", order: 12, description: "A large thila with dramatic overhangs draped in soft corals and sea fans in every shade of red, orange, and purple. Napoleon wrasse are resident here, often approaching divers with curiosity. Eagle rays cruise the sandy channels between the reef blocks.", highlights: ["Soft coral overhangs", "Napoleon wrasse", "Eagle rays", "Manta rays in season"], marineLife: ["Napoleon wrasse", "Eagle ray", "Manta ray", "Soft corals", "Sea fans", "Anthias"] },
+].map((s) => ({
+  _type: "diveSite",
+  _id: s._id,
+  name: s.name,
+  slug: { _type: "slug", current: s.slug },
+  depth: s.depth,
+  siteType: s.siteType,
+  difficulty: s.difficulty,
+  season: s.season,
+  order: s.order,
+  description: s.description,
+  highlights: s.highlights,
+  marineLife: s.marineLife,
+}));
+
 // ── Site Settings ──
 const siteSettings = {
   _type: "siteSettings",
@@ -333,6 +362,7 @@ async function seed() {
     ...accommodation,
     ...testimonials,
     ...species,
+    ...diveSites,
     siteSettings,
   ];
 

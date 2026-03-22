@@ -114,6 +114,21 @@ export interface MarineSpecies {
   order?: number;
 }
 
+export interface DiveSite {
+  _id: string;
+  name: string;
+  slug: Slug;
+  image?: SanityImage;
+  depth?: string;
+  siteType?: string;
+  description?: string;
+  highlights?: string[];
+  marineLife?: string[];
+  difficulty?: string;
+  season?: string;
+  order?: number;
+}
+
 export interface SiteSettings {
   _id: string;
   siteName: string;

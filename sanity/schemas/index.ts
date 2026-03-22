@@ -7,6 +7,7 @@ import { galleryImageSchema } from "./galleryImage";
 import { marineSpeciesSchema } from "./marineSpecies";
 import { testimonialSchema } from "./testimonial";
 import { siteSettingsSchema } from "./siteSettings";
+import { diveSiteSchema } from "./diveSite";
 
 export const schemaTypes = [
   packageSchema,
@@ -18,4 +19,5 @@ export const schemaTypes = [
   marineSpeciesSchema,
   testimonialSchema,
   siteSettingsSchema,
+  diveSiteSchema,
 ];

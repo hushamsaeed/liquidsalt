@@ -105,6 +105,14 @@ export const allSpeciesQuery = groq`
   }
 `;
 
+// ── Dive Sites ──
+export const allDiveSitesQuery = groq`
+  *[_type == "diveSite"] | order(order asc) {
+    _id, name, slug, image, depth, siteType, description,
+    highlights, marineLife, difficulty, season, order
+  }
+`;
+
 // ── Site Settings ──
 export const siteSettingsQuery = groq`
   *[_type == "siteSettings"][0] {

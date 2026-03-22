@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Nav } from "@/components/layout/Nav";
@@ -5,58 +7,19 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { STATIC_DIVE_SITES } from "@/lib/data/diveSites";
+import { sanityFetch } from "@/lib/sanity/fetch";
+import { allDiveSitesQuery } from "@/lib/sanity/queries";
 
 export const metadata: Metadata = {
   title: "Dive Sites — Baa Atoll",
   description: "Discover the best dive sites in Baa Atoll, Maldives. Channel drifts, thilas, cleaning stations, and Hanifaru Bay — all minutes from Dharavandhoo.",
 };
 
-const DIVE_SITES = [
-  {
-    name: "Hanifaru Bay",
-    depth: "5–15m",
-    type: "Bay / Aggregation Site",
-    description: "The main event. UNESCO-protected bay where plankton-rich currents trigger cyclone feeding aggregations of 200+ manta rays. Snorkelling and diving permitted with licensed guides only.",
-    highlights: ["Manta ray aggregations", "Whale shark sightings", "UNESCO protected"],
-  },
-  {
-    name: "Dhonfanu Thila",
-    depth: "12–30m",
-    type: "Thila (Submerged Pinnacle)",
-    description: "A stunning underwater pinnacle covered in soft corals and sea fans. Grey reef sharks patrol the deeper edges while schools of fusiliers swirl above the reef top.",
-    highlights: ["Grey reef sharks", "Soft coral gardens", "Strong current drifts"],
-  },
-  {
-    name: "Dharavandhoo Corner",
-    depth: "10–25m",
-    type: "Channel / Reef",
-    description: "Our house reef and a favourite for relaxed afternoon dives. A sloping reef wall with overhangs sheltering nurse sharks, moray eels, and the occasional eagle ray.",
-    highlights: ["Nurse sharks", "Eagle rays", "Easy access from island"],
-  },
-  {
-    name: "Nelivaru Haa",
-    depth: "15–30m",
-    type: "Channel",
-    description: "A channel dive best done as a drift. Manta rays visit the cleaning stations here year-round, hovering motionless while cleaner wrasse do their work.",
-    highlights: ["Manta cleaning station", "Drift diving", "Year-round mantas"],
-  },
-  {
-    name: "Maavaru Kandu",
-    depth: "12–28m",
-    type: "Channel",
-    description: "Wide channel with excellent visibility and reliable current. White-tip reef sharks rest on the sandy bottom while Napoleon wrasse cruise the reef edge.",
-    highlights: ["White-tip reef sharks", "Napoleon wrasse", "Excellent visibility"],
-  },
-  {
-    name: "Kudalhavahaa Thila",
-    depth: "8–25m",
-    type: "Thila",
-    description: "A compact thila surrounded by deep blue. The reef top at 8m is perfect for safety stops, with hawksbill turtles often seen grazing on the sponges.",
-    highlights: ["Hawksbill turtles", "Compact reef", "Great for photography"],
-  },
-];
+export default async function DiveSitesPage() {
+  const sanitySites = await sanityFetch<any[] | null>(allDiveSitesQuery, {}, null);
+  const sites = sanitySites && sanitySites.length > 0 ? sanitySites : STATIC_DIVE_SITES;
 
-export default function DiveSitesPage() {
   return (
     <>
       <Nav />
@@ -70,7 +33,7 @@ export default function DiveSitesPage() {
             </span>
             <h1 className="font-display text-5xl md:text-6xl text-salt-white">Dive Sites</h1>
             <p className="mt-4 text-lg text-salt-white/80">
-              Six of our favourite sites — each with its own character, residents, and reason to return
+              {sites.length} of our favourite sites — each with its own character, residents, and reason to return
             </p>
           </div>
         </section>
@@ -78,26 +41,58 @@ export default function DiveSitesPage() {
         <SectionWrapper className="py-space-12 lg:py-space-16">
           <div className="mx-auto max-w-5xl px-6">
             <div className="space-y-8">
-              {DIVE_SITES.map((site) => (
-                <div key={site.name} className="bg-salt-white rounded-lg p-8 shadow-card">
+              {sites.map((site: any) => (
+                <div key={site._id || site.name} className="bg-salt-white rounded-lg p-8 shadow-card">
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                     <div className="flex-1">
-                      <h2 className="font-display text-2xl text-ocean-navy">{site.name}</h2>
+                      <div className="flex items-center gap-3 flex-wrap">
+                        <h2 className="font-display text-2xl text-ocean-navy">{site.name}</h2>
+                        {site.difficulty && site.difficulty !== "All Levels" && (
+                          <span className={`text-xs font-bold px-2 py-0.5 rounded-full uppercase ${
+                            site.difficulty === "Advanced"
+                              ? "bg-coral-gold/15 text-coral-gold"
+                              : "bg-cyan/15 text-cyan"
+                          }`}>
+                            {site.difficulty}
+                          </span>
+                        )}
+                      </div>
                       <div className="mt-1 flex flex-wrap gap-3 text-sm text-ocean-navy/60">
-                        <span>{site.type}</span>
-                        <span>&middot;</span>
-                        <span>Depth: {site.depth}</span>
+                        {site.siteType && <span>{site.siteType}</span>}
+                        {site.siteType && site.depth && <span>&middot;</span>}
+                        {site.depth && <span>Depth: {site.depth}</span>}
+                        {site.season && site.season !== "Year-round" && (
+                          <>
+                            <span>&middot;</span>
+                            <span>{site.season}</span>
+                          </>
+                        )}
                       </div>
                       <p className="mt-3 text-ocean-navy/80 leading-relaxed">{site.description}</p>
                     </div>
                   </div>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {site.highlights.map((h) => (
-                      <span key={h} className="text-xs font-medium bg-cyan/10 text-cyan px-2.5 py-1 rounded-full">
-                        {h}
-                      </span>
-                    ))}
-                  </div>
+
+                  {/* Highlights */}
+                  {site.highlights && site.highlights.length > 0 && (
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {site.highlights.map((h: string) => (
+                        <span key={h} className="text-xs font-medium bg-cyan/10 text-cyan px-2.5 py-1 rounded-full">
+                          {h}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Marine Life */}
+                  {site.marineLife && site.marineLife.length > 0 && (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {site.marineLife.map((m: string) => (
+                        <span key={m} className="text-xs text-ocean-navy/50 bg-ocean-navy/5 px-2 py-0.5 rounded">
+                          {m}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
