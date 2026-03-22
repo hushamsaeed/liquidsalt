@@ -16,7 +16,7 @@ COPY . .
 # Set build-time env defaults so build doesn't fail
 ENV NEXT_PUBLIC_SITE_URL=https://liquidsaltdivers.com
 ENV NEXT_PUBLIC_WHATSAPP_NUMBER=+9607773998
-ENV NEXT_PUBLIC_SANITY_PROJECT_ID=placeholder
+ENV NEXT_PUBLIC_SANITY_PROJECT_ID=bs3v46tq
 ENV NEXT_PUBLIC_SANITY_DATASET=production
 
 RUN npm run build
