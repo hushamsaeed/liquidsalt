@@ -6,25 +6,46 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
 import { STATIC_PACKAGES } from "@/lib/data/packages";
-
-// TODO: Replace with Sanity fetch when CMS has content
-// import { client } from "@/lib/sanity/client";
-// import { packageBySlugQuery, packageSlugsQuery } from "@/lib/sanity/queries";
+import { sanityFetch } from "@/lib/sanity/fetch";
+import { packageBySlugQuery, packageSlugsQuery } from "@/lib/sanity/queries";
+import { imageUrl } from "@/lib/sanity/image";
+import { toPlainText } from "@/lib/sanity/portableText";
 
 interface PageProps {
   params: { slug: string };
 }
 
-function getPackage(slug: string) {
-  return STATIC_PACKAGES.find((p) => p.slug.current === slug);
+async function getPackage(slug: string) {
+  // Try Sanity first
+  const sanityPkg = await sanityFetch<any>(packageBySlugQuery, { slug }, null);
+  if (sanityPkg) {
+    return {
+      ...sanityPkg,
+      heroImage: imageUrl(sanityPkg.heroImage, 1920) || `/images/packages/${slug}.webp`,
+      descriptionText: toPlainText(sanityPkg.description),
+      // Normalize slug to { current: string } shape for consistency
+      slug: typeof sanityPkg.slug === "string"
+        ? { current: sanityPkg.slug }
+        : sanityPkg.slug,
+    };
+  }
+  // Fallback to static
+  return STATIC_PACKAGES.find((p) => p.slug.current === slug) || null;
 }
 
 export async function generateStaticParams() {
-  return STATIC_PACKAGES.map((p) => ({ slug: p.slug.current }));
+  const sanitySlugs = await sanityFetch<{ slug: string }[]>(packageSlugsQuery, {}, []);
+  const staticSlugs = STATIC_PACKAGES.map((p) => ({ slug: p.slug.current }));
+  // Merge and deduplicate
+  const allSlugs = [...staticSlugs];
+  for (const s of sanitySlugs) {
+    if (!allSlugs.find((x) => x.slug === s.slug)) allSlugs.push(s);
+  }
+  return allSlugs;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const pkg = getPackage(params.slug);
+  const pkg = await getPackage(params.slug);
   if (!pkg) return {};
   return {
     title: `${pkg.title} | Liquid Salt Divers`,
@@ -32,8 +53,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function PackagePage({ params }: PageProps) {
-  const pkg = getPackage(params.slug);
+export default async function PackagePage({ params }: PageProps) {
+  const pkg = await getPackage(params.slug);
   if (!pkg) notFound();
 
   const otherPackages = STATIC_PACKAGES.filter((p) => p.slug.current !== params.slug);
@@ -46,7 +67,7 @@ export default function PackagePage({ params }: PageProps) {
         <section className="relative bg-gradient-to-b from-ocean-navy via-reef-teal to-night-dive pt-32 pb-20 overflow-hidden">
           {pkg.heroImage && (
             <>
-              <img src={pkg.heroImage} alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+              <img src={typeof pkg.heroImage === "string" ? pkg.heroImage : ""} alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
               <div className="absolute inset-0 bg-gradient-to-b from-ocean-navy/60 via-ocean-navy/40 to-night-dive/80" />
             </>
           )}
@@ -93,7 +114,7 @@ export default function PackagePage({ params }: PageProps) {
                 <div className="bg-salt-white rounded-lg p-6 shadow-card sticky top-24">
                   <h3 className="font-semibold text-ocean-navy mb-4">What&apos;s Included</h3>
                   <ul className="space-y-2">
-                    {pkg.inclusions?.map((item) => (
+                    {pkg.inclusions?.map((item: string) => (
                       <li key={item} className="flex items-start gap-2 text-sm text-ocean-navy/80">
                         <svg className="w-4 h-4 mt-0.5 text-cyan shrink-0" fill="none" viewBox="0 0 16 16" aria-hidden="true">
                           <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

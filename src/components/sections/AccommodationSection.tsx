@@ -3,7 +3,8 @@
 import { SectionWrapper } from "../ui/SectionWrapper";
 import { AccommodationCard } from "../ui/AccommodationCard";
 
-const PROPERTIES = [
+// Static data — used as fallback when Sanity has no content
+const DEFAULT_PROPERTIES = [
   {
     name: "Aveyla Manta Village",
     description: "Beachfront guesthouse with ocean-facing rooms, rooftop terrace, and direct beach access.",
@@ -30,7 +31,20 @@ const PROPERTIES = [
   },
 ];
 
-export function AccommodationSection() {
+interface AccommodationProp {
+  name: string;
+  description: string;
+  image?: string;
+  bookingUrl?: string;
+}
+
+interface AccommodationSectionProps {
+  accommodation?: AccommodationProp[];
+}
+
+export function AccommodationSection({ accommodation }: AccommodationSectionProps) {
+  const data = accommodation && accommodation.length > 0 ? accommodation : DEFAULT_PROPERTIES;
+
   return (
     <SectionWrapper className="py-space-12 lg:py-space-16 bg-sand wave-divider" id="accommodation">
       <div className="mx-auto max-w-7xl px-6">
@@ -42,7 +56,7 @@ export function AccommodationSection() {
         </p>
 
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {PROPERTIES.map((prop) => (
+          {data.map((prop) => (
             <AccommodationCard key={prop.name} {...prop} />
           ))}
         </div>

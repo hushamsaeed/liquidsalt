@@ -3,8 +3,8 @@
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { PackageCard } from "@/components/ui/PackageCard";
 
-// Static data — will be replaced with Sanity CMS data in Phase 4
-const PACKAGES = [
+// Static data — used as fallback when Sanity has no content
+const DEFAULT_PACKAGES = [
   {
     title: "Manta Madness",
     slug: "manta-madness",
@@ -52,7 +52,24 @@ const PACKAGES = [
   },
 ];
 
-export function PackagesSection() {
+interface PackagesProp {
+  title: string;
+  slug: string;
+  badge?: string;
+  priceFrom: number;
+  pricePer?: string;
+  image?: string;
+  inclusions?: string[];
+  description?: string;
+  featured?: boolean;
+}
+
+interface PackagesSectionProps {
+  packages?: PackagesProp[];
+}
+
+export function PackagesSection({ packages }: PackagesSectionProps) {
+  const data = packages && packages.length > 0 ? packages : DEFAULT_PACKAGES;
   return (
     <SectionWrapper className="py-space-12 lg:py-space-16 bg-salt-white" id="packages">
       <div className="mx-auto max-w-7xl px-6">
@@ -65,7 +82,7 @@ export function PackagesSection() {
         </p>
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {PACKAGES.map((pkg) => (
+          {data.map((pkg) => (
             <PackageCard key={pkg.slug} {...pkg} />
           ))}
         </div>

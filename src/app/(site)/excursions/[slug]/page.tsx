@@ -6,21 +6,44 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
 import { STATIC_EXCURSIONS } from "@/lib/data/excursions";
+import { sanityFetch } from "@/lib/sanity/fetch";
+import { excursionBySlugQuery, excursionSlugsQuery } from "@/lib/sanity/queries";
+import { imageUrl } from "@/lib/sanity/image";
+import { toPlainText } from "@/lib/sanity/portableText";
 
 interface PageProps {
   params: { slug: string };
 }
 
-function getExcursion(slug: string) {
-  return STATIC_EXCURSIONS.find((e) => e.slug.current === slug);
+async function getExcursion(slug: string) {
+  // Try Sanity first
+  const sanityExc = await sanityFetch<any>(excursionBySlugQuery, { slug }, null);
+  if (sanityExc) {
+    return {
+      ...sanityExc,
+      heroImage: imageUrl(sanityExc.heroImage, 1920) || `/images/experiences/${slug}.webp`,
+      descriptionText: toPlainText(sanityExc.description),
+      slug: typeof sanityExc.slug === "string"
+        ? { current: sanityExc.slug }
+        : sanityExc.slug,
+    };
+  }
+  // Fallback to static
+  return STATIC_EXCURSIONS.find((e) => e.slug.current === slug) || null;
 }
 
 export async function generateStaticParams() {
-  return STATIC_EXCURSIONS.map((e) => ({ slug: e.slug.current }));
+  const sanitySlugs = await sanityFetch<{ slug: string }[]>(excursionSlugsQuery, {}, []);
+  const staticSlugs = STATIC_EXCURSIONS.map((e) => ({ slug: e.slug.current }));
+  const allSlugs = [...staticSlugs];
+  for (const s of sanitySlugs) {
+    if (!allSlugs.find((x) => x.slug === s.slug)) allSlugs.push(s);
+  }
+  return allSlugs;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const excursion = getExcursion(params.slug);
+  const excursion = await getExcursion(params.slug);
   if (!excursion) return {};
   return {
     title: `${excursion.title} | Liquid Salt Divers`,
@@ -30,8 +53,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function ExcursionPage({ params }: PageProps) {
-  const excursion = getExcursion(params.slug);
+export default async function ExcursionPage({ params }: PageProps) {
+  const excursion = await getExcursion(params.slug);
   if (!excursion) notFound();
 
   const relatedExcursions = STATIC_EXCURSIONS.filter(
@@ -46,7 +69,7 @@ export default function ExcursionPage({ params }: PageProps) {
         <section className="relative bg-gradient-to-b from-ocean-navy via-reef-teal to-night-dive pt-32 pb-20 overflow-hidden">
           {excursion.heroImage && (
             <>
-              <img src={excursion.heroImage} alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+              <img src={typeof excursion.heroImage === "string" ? excursion.heroImage : ""} alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
               <div className="absolute inset-0 bg-gradient-to-b from-ocean-navy/60 via-ocean-navy/40 to-night-dive/80" />
             </>
           )}
@@ -121,7 +144,7 @@ export default function ExcursionPage({ params }: PageProps) {
                     What&apos;s Included
                   </h3>
                   <ul className="space-y-2">
-                    {excursion.included?.map((item) => (
+                    {excursion.included?.map((item: string) => (
                       <li
                         key={item}
                         className="flex items-start gap-2 text-sm text-ocean-navy/80"

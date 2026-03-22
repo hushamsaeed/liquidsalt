@@ -4,7 +4,8 @@ import { SectionWrapper } from "../ui/SectionWrapper";
 import { SpeciesCard } from "../ui/SpeciesCard";
 import { SeasonCalendar } from "../ui/SeasonCalendar";
 
-const SPECIES = [
+// Static data — used as fallback when Sanity has no content
+const DEFAULT_SPECIES = [
   {
     name: "Reef Manta Ray",
     scientificName: "Mobula alfredi",
@@ -35,7 +36,21 @@ const SPECIES = [
   },
 ];
 
-export function HanifaruBayEditorial() {
+interface SpeciesProp {
+  name: string;
+  scientificName?: string;
+  description: string;
+  image?: string;
+  season?: string;
+}
+
+interface HanifaruBayEditorialProps {
+  species?: SpeciesProp[];
+}
+
+export function HanifaruBayEditorial({ species }: HanifaruBayEditorialProps) {
+  const data = species && species.length > 0 ? species : DEFAULT_SPECIES;
+
   return (
     <SectionWrapper className="py-space-12 lg:py-space-16 bg-salt-white" id="hanifaru-bay">
       <div className="mx-auto max-w-7xl px-6">
@@ -86,8 +101,8 @@ export function HanifaruBayEditorial() {
               Marine Life You&apos;ll Encounter
             </h3>
             <div className="space-y-2">
-              {SPECIES.map((species) => (
-                <SpeciesCard key={species.name} {...species} />
+              {data.map((s) => (
+                <SpeciesCard key={s.name} {...s} />
               ))}
             </div>
           </div>

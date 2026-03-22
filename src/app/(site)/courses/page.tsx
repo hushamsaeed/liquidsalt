@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
-import { Button } from "@/components/ui/Button";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { STATIC_COURSES } from "@/lib/data/courses";
+import { sanityFetch } from "@/lib/sanity/fetch";
+import { allCoursesQuery } from "@/lib/sanity/queries";
+import { imageUrl } from "@/lib/sanity/image";
 
 export const metadata: Metadata = {
   title: "PADI Courses",
@@ -20,7 +22,21 @@ const levelColors: Record<string, string> = {
   specialty: "bg-manta-black/10 text-manta-black",
 };
 
-export default function CoursesPage() {
+export default async function CoursesPage() {
+  // Fetch from Sanity, fall back to static data
+  const sanityCourses = await sanityFetch<any[] | null>(allCoursesQuery, {}, null);
+
+  const courses = sanityCourses
+    ? sanityCourses.map((c: any) => ({
+        ...c,
+        slug: typeof c.slug === "string" ? c.slug : c.slug?.current || "",
+        heroImageUrl: imageUrl(c.heroImage, 800),
+      }))
+    : STATIC_COURSES.map((c) => ({
+        ...c,
+        slug: c.slug.current,
+      }));
+
   return (
     <>
       <Nav />
@@ -39,10 +55,10 @@ export default function CoursesPage() {
         <SectionWrapper className="py-space-12 lg:py-space-16">
           <div className="mx-auto max-w-5xl px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {STATIC_COURSES.map((course) => (
+              {courses.map((course: any) => (
                 <Link
-                  key={course.slug.current}
-                  href={`/courses/${course.slug.current}`}
+                  key={course.slug}
+                  href={`/courses/${course.slug}`}
                   className="group block bg-salt-white rounded-lg p-6 shadow-card hover:shadow-hover hover:-translate-y-1 transition-all duration-200"
                 >
                   {course.level && (

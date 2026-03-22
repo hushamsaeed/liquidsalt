@@ -54,8 +54,12 @@ export const allExcursionsQuery = groq`
 
 export const excursionBySlugQuery = groq`
   *[_type == "excursion" && slug.current == $slug][0] {
-    _id, title, slug, heroImage, description, price, duration, included
+    _id, title, slug, heroImage, shortDescription, description, price, duration, included
   }
+`;
+
+export const excursionSlugsQuery = groq`
+  *[_type == "excursion"] { "slug": slug.current }
 `;
 
 // ── Accommodation ──
@@ -65,10 +69,14 @@ export const allAccommodationQuery = groq`
   }
 `;
 
-// ── Testimonials ──
+// ── Testimonials (schema uses author/quote/location — alias to name/text/country) ──
 export const allTestimonialsQuery = groq`
-  *[_type == "testimonial"] | order(_createdAt desc)[0...6] {
-    _id, name, country, text, rating
+  *[_type == "testimonial"] | order(order asc) [0...6] {
+    _id,
+    "name": author,
+    "country": location,
+    "text": quote,
+    rating
   }
 `;
 
@@ -79,10 +87,19 @@ export const allGalleryQuery = groq`
   }
 `;
 
-// ── Marine Species ──
+// ── Marine Species (schema uses commonName — alias to name) ──
 export const allSpeciesQuery = groq`
   *[_type == "marineSpecies"] | order(order asc) {
-    _id, name, scientificName, description, image, season, order
+    _id,
+    "name": commonName,
+    scientificName,
+    description,
+    image,
+    "season": select(
+      count(bestMonths) > 0 => bestMonths[0] + " — " + bestMonths[count(bestMonths)-1],
+      "Year-round"
+    ),
+    order
   }
 `;
 

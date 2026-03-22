@@ -6,21 +6,44 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
 import { STATIC_COURSES } from "@/lib/data/courses";
+import { sanityFetch } from "@/lib/sanity/fetch";
+import { courseBySlugQuery, courseSlugsQuery } from "@/lib/sanity/queries";
+import { imageUrl } from "@/lib/sanity/image";
+import { toPlainText } from "@/lib/sanity/portableText";
 
 interface PageProps {
   params: { slug: string };
 }
 
-function getCourse(slug: string) {
-  return STATIC_COURSES.find((c) => c.slug.current === slug);
+async function getCourse(slug: string) {
+  // Try Sanity first
+  const sanityCourse = await sanityFetch<any>(courseBySlugQuery, { slug }, null);
+  if (sanityCourse) {
+    return {
+      ...sanityCourse,
+      heroImage: imageUrl(sanityCourse.heroImage, 1920) || undefined,
+      overviewText: toPlainText(sanityCourse.overview),
+      slug: typeof sanityCourse.slug === "string"
+        ? { current: sanityCourse.slug }
+        : sanityCourse.slug,
+    };
+  }
+  // Fallback to static
+  return STATIC_COURSES.find((c) => c.slug.current === slug) || null;
 }
 
 export async function generateStaticParams() {
-  return STATIC_COURSES.map((c) => ({ slug: c.slug.current }));
+  const sanitySlugs = await sanityFetch<{ slug: string }[]>(courseSlugsQuery, {}, []);
+  const staticSlugs = STATIC_COURSES.map((c) => ({ slug: c.slug.current }));
+  const allSlugs = [...staticSlugs];
+  for (const s of sanitySlugs) {
+    if (!allSlugs.find((x) => x.slug === s.slug)) allSlugs.push(s);
+  }
+  return allSlugs;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const course = getCourse(params.slug);
+  const course = await getCourse(params.slug);
   if (!course) return {};
   return {
     title: `${course.title} | PADI Course | Liquid Salt Divers`,
@@ -36,8 +59,8 @@ const levelColors: Record<string, string> = {
   specialty: "bg-manta-black/10 text-manta-black",
 };
 
-export default function CoursePage({ params }: PageProps) {
-  const course = getCourse(params.slug);
+export default async function CoursePage({ params }: PageProps) {
+  const course = await getCourse(params.slug);
   if (!course) notFound();
 
   const relatedCourses = STATIC_COURSES.filter(
@@ -91,7 +114,7 @@ export default function CoursePage({ params }: PageProps) {
                   <div className="mt-10">
                     <h3 className="font-semibold text-ocean-navy mb-3">Prerequisites</h3>
                     <ul className="space-y-2">
-                      {course.prerequisites.map((req) => (
+                      {course.prerequisites.map((req: string) => (
                         <li key={req} className="flex items-start gap-2 text-sm text-ocean-navy/80">
                           <svg className="w-4 h-4 mt-0.5 text-reef-teal shrink-0" fill="none" viewBox="0 0 16 16" aria-hidden="true">
                             <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -109,7 +132,7 @@ export default function CoursePage({ params }: PageProps) {
                 <div className="bg-salt-white rounded-lg p-6 shadow-card sticky top-24">
                   <h3 className="font-semibold text-ocean-navy mb-4">What&apos;s Included</h3>
                   <ul className="space-y-2">
-                    {course.included?.map((item) => (
+                    {course.included?.map((item: string) => (
                       <li key={item} className="flex items-start gap-2 text-sm text-ocean-navy/80">
                         <svg className="w-4 h-4 mt-0.5 text-cyan shrink-0" fill="none" viewBox="0 0 16 16" aria-hidden="true">
                           <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

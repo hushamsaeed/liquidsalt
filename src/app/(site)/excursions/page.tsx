@@ -5,13 +5,31 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { STATIC_EXCURSIONS } from "@/lib/data/excursions";
+import { sanityFetch } from "@/lib/sanity/fetch";
+import { allExcursionsQuery } from "@/lib/sanity/queries";
+import { imageUrl } from "@/lib/sanity/image";
 
 export const metadata: Metadata = {
   title: "Excursions",
   description: "Excursions from Dharavandhoo — snorkelling, sandbank trips, night snorkelling, and big game fishing in the Baa Atoll, Maldives.",
 };
 
-export default function ExcursionsPage() {
+export default async function ExcursionsPage() {
+  // Fetch from Sanity, fall back to static data
+  const sanityExcursions = await sanityFetch<any[] | null>(allExcursionsQuery, {}, null);
+
+  const excursions = sanityExcursions
+    ? sanityExcursions.map((exc: any) => ({
+        ...exc,
+        slug: typeof exc.slug === "string" ? exc.slug : exc.slug?.current || "",
+        heroImageUrl: imageUrl(exc.heroImage, 800) || `/images/experiences/${typeof exc.slug === "string" ? exc.slug : exc.slug?.current}.webp`,
+      }))
+    : STATIC_EXCURSIONS.map((exc) => ({
+        ...exc,
+        slug: exc.slug.current,
+        heroImageUrl: exc.heroImage,
+      }));
+
   return (
     <>
       <Nav />
@@ -30,15 +48,15 @@ export default function ExcursionsPage() {
         <SectionWrapper className="py-space-12 lg:py-space-16">
           <div className="mx-auto max-w-5xl px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {STATIC_EXCURSIONS.map((exc) => (
+              {excursions.map((exc: any) => (
                 <Link
-                  key={exc.slug.current}
-                  href={`/excursions/${exc.slug.current}`}
+                  key={exc.slug}
+                  href={`/excursions/${exc.slug}`}
                   className="group block bg-salt-white rounded-lg overflow-hidden shadow-card hover:shadow-hover hover:-translate-y-1 transition-all duration-200"
                 >
                   <div className="relative aspect-video overflow-hidden">
-                    {exc.heroImage ? (
-                      <img src={exc.heroImage} alt={exc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-400" />
+                    {exc.heroImageUrl ? (
+                      <img src={exc.heroImageUrl} alt={exc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-400" />
                     ) : (
                       <div className="w-full h-full bg-ocean-navy/10" />
                     )}

@@ -4,7 +4,8 @@ import { useState, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
-const TESTIMONIALS = [
+// Static data — used as fallback when Sanity has no content
+const DEFAULT_TESTIMONIALS = [
   {
     name: "Sarah K.",
     country: "Australia",
@@ -25,19 +26,31 @@ const TESTIMONIALS = [
   },
 ];
 
-export function SocialProof() {
+interface TestimonialProp {
+  name: string;
+  country?: string;
+  text: string;
+  rating: number;
+}
+
+interface SocialProofProps {
+  testimonials?: TestimonialProp[];
+}
+
+export function SocialProof({ testimonials }: SocialProofProps) {
+  const data = testimonials && testimonials.length > 0 ? testimonials : DEFAULT_TESTIMONIALS;
   const [activeIndex, setActiveIndex] = useState(0);
 
   const advance = useCallback(() => {
-    setActiveIndex((prev) => (prev + 1) % TESTIMONIALS.length);
-  }, []);
+    setActiveIndex((prev) => (prev + 1) % data.length);
+  }, [data.length]);
 
   useEffect(() => {
     const interval = setInterval(advance, 5000);
     return () => clearInterval(interval);
   }, [advance]);
 
-  const testimonial = TESTIMONIALS[activeIndex];
+  const testimonial = data[activeIndex];
 
   return (
     <SectionWrapper className="py-space-12 lg:py-space-16" id="reviews">
@@ -99,7 +112,7 @@ export function SocialProof() {
 
             {/* Dot indicators */}
             <div className="flex justify-center gap-2 mt-6">
-              {TESTIMONIALS.map((_, i) => (
+              {data.map((_, i) => (
                 <button
                   key={i}
                   type="button"

@@ -3,8 +3,8 @@
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { TeamCard } from "@/components/ui/TeamCard";
 
-// Static data — will be replaced with Sanity CMS data
-const TEAM = [
+// Static data — used as fallback when Sanity has no content
+const DEFAULT_TEAM = [
   {
     name: "Ryshyn",
     role: "Founder & PADI Instructor",
@@ -77,7 +77,22 @@ const TEAM = [
   },
 ];
 
-export function TeamSection() {
+interface TeamMemberProp {
+  name: string;
+  role: string;
+  photo?: string;
+  instagram?: string;
+  certifications?: string[];
+  bio?: string;
+}
+
+interface TeamSectionProps {
+  team?: TeamMemberProp[];
+}
+
+export function TeamSection({ team }: TeamSectionProps) {
+  const data: TeamMemberProp[] = team && team.length > 0 ? team : DEFAULT_TEAM;
+
   return (
     <SectionWrapper className="py-space-12 lg:py-space-16" id="team">
       <div className="mx-auto max-w-7xl px-6">
@@ -96,11 +111,12 @@ export function TeamSection() {
         </p>
 
         <div className="mt-12 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {TEAM.map((member) => (
+          {data.map((member) => (
             <TeamCard
               key={member.name}
               name={member.name}
               role={member.role}
+              photo={member.photo}
               instagram={member.instagram || undefined}
               certifications={member.certifications}
               bio={member.bio}

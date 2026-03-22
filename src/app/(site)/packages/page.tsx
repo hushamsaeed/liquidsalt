@@ -5,13 +5,33 @@ import { PackageCard } from "@/components/ui/PackageCard";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { STATIC_PACKAGES } from "@/lib/data/packages";
+import { sanityFetch } from "@/lib/sanity/fetch";
+import { allPackagesQuery } from "@/lib/sanity/queries";
+import { imageUrl } from "@/lib/sanity/image";
+import { toPlainText } from "@/lib/sanity/portableText";
 
 export const metadata: Metadata = {
   title: "Dive Packages",
   description: "Dive packages at Liquid Salt Divers — Manta Madness, Dive Dive Dive, Dive Hanifaru. All-inclusive packages with equipment, boat transfers, and expert guides.",
 };
 
-export default function PackagesPage() {
+export default async function PackagesPage() {
+  // Fetch from Sanity, fall back to static data
+  const sanityPackages = await sanityFetch<any[] | null>(allPackagesQuery, {}, null);
+
+  const packages = sanityPackages
+    ? sanityPackages.map((pkg: any) => ({
+        ...pkg,
+        slug: typeof pkg.slug === "string" ? pkg.slug : pkg.slug?.current || "",
+        image: imageUrl(pkg.cardImage || pkg.heroImage, 800) || `/images/packages/${typeof pkg.slug === "string" ? pkg.slug : pkg.slug?.current}.webp`,
+        descriptionText: toPlainText(pkg.description),
+      }))
+    : STATIC_PACKAGES.map((pkg) => ({
+        ...pkg,
+        slug: pkg.slug.current,
+        image: `/images/packages/${pkg.slug.current}.webp`,
+      }));
+
   return (
     <>
       <Nav />
@@ -30,18 +50,18 @@ export default function PackagesPage() {
         <SectionWrapper className="py-space-12 lg:py-space-16">
           <div className="mx-auto max-w-5xl px-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {STATIC_PACKAGES.map((pkg) => (
+              {packages.map((pkg: any) => (
                 <PackageCard
-                  key={pkg.slug.current}
+                  key={pkg.slug}
                   title={pkg.title}
-                  slug={pkg.slug.current}
+                  slug={pkg.slug}
                   priceFrom={pkg.priceFrom}
                   pricePer={pkg.pricePer}
                   badge={pkg.badge}
                   featured={pkg.featured}
                   inclusions={pkg.inclusions}
                   description={pkg.descriptionText}
-                  image={`/images/packages/${pkg.slug.current}.webp`}
+                  image={pkg.image}
                 />
               ))}
             </div>
