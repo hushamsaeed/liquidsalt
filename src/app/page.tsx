@@ -23,6 +23,7 @@ import {
   allSpeciesQuery,
 } from "@/lib/sanity/queries";
 import { imageUrl } from "@/lib/sanity/image";
+import { toPlainText } from "@/lib/sanity/portableText";
 
 type SanityDoc = Record<string, any>;
 
@@ -91,7 +92,7 @@ export default async function HomePage() {
       ? species.map((s) => ({
           name: s.name,
           scientificName: s.scientificName,
-          description: s.description,
+          description: toPlainText(s.description),
           image: imageUrl(s.image) || undefined,
           season: s.season,
         }))
