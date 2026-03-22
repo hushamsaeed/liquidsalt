@@ -43,6 +43,12 @@ export function Hero({
             poster={posterSrc}
             className="absolute inset-0 h-full w-full object-cover"
           >
+            {videoSrc && (
+              <source
+                src={videoSrc.replace(".mp4", ".webm")}
+                type="video/webm"
+              />
+            )}
             <source src={videoSrc} type="video/mp4" />
           </video>
         ) : imageSrc ? (

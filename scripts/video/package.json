@@ -1,0 +1,28 @@
+{
+  "name": "liquidsalt-video",
+  "private": true,
+  "scripts": {
+    "preview": "remotion studio src/Root.tsx",
+    "render:intro": "npx tsx render.ts BrandedIntro",
+    "render:outro": "npx tsx render.ts BrandedOutro",
+    "render:promo": "npx tsx render.ts PromoVideo",
+    "render:hero": "npx tsx render.ts HeroLoop",
+    "render:social-sq": "npx tsx render.ts SocialSquare",
+    "render:social-vert": "npx tsx render.ts SocialVertical",
+    "render:all": "npx tsx render.ts --all",
+    "pipeline": "bash ffmpeg-pipeline.sh"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.0",
+    "@remotion/renderer": "^4.0.0",
+    "@remotion/google-fonts": "^4.0.0",
+    "remotion": "^4.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "tsx": "^4.21.0",
+    "@types/react": "^18"
+  }
+}

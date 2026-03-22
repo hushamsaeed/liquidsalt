@@ -104,7 +104,11 @@ export default async function HomePage() {
 
       <main id="main-content">
         {/* 01 — Hero: The Surface */}
-        <Hero imageSrc="/images/heroes/homepage.webp" />
+        <Hero
+          videoSrc="/videos/hero-loop.mp4"
+          posterSrc="/videos/hero-poster.jpg"
+          imageSrc="/images/heroes/homepage.webp"
+        />
 
         {/* 02 — Credential Strip */}
         <CredentialStrip />
